@@ -430,6 +430,21 @@ process.argv.slice(2).forEach(function (file) {
     require(path.resolve(file));
 });
 ```
+An convenient alternative to achieve the same:
+```js
+// report.js
+var test = require('tape');
+var path = require('path');
+
+test.createStream({ objectMode: true }).on('data', function (row) {
+    console.log(JSON.stringify(row)) // for example
+});
+```
+and then:
+```sh
+$ tape -r ./report.js **/*.test.js
+```
+
 
 The output for this runner is:
 
